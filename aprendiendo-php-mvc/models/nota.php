@@ -7,6 +7,10 @@
         public $nombre;
         public $contenido;
 
+        public function __construct(){
+            parent::__construct();
+        }
+
         //GET Y SET PARA NOMBRE
         public function getNombre(){
             return $this->nombre;

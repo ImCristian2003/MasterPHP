@@ -9,6 +9,10 @@
         public $email;
         public $password;
 
+        public function __construct(){
+            parent::__construct();
+        }
+
         //GET Y SET PARA NOMBRE
         public function getNombre(){
             return $this->nombre;

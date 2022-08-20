@@ -11,6 +11,8 @@
             $nota->setContenido("Hola mundo");
             $nota->setNombre("Hola");
 
+            $notas = $nota->conseguirTodos('notas');
+
             //Llamado a la vista
             require_once 'views/notas/listar.php';
         }
