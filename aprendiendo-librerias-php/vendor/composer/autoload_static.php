@@ -6,14 +6,36 @@ namespace Composer\Autoload;
 
 class ComposerStaticInit0b0f17c0e3fc386c879c1e670df35671
 {
+    public static $files = array (
+        '0a80d26768cd24fcdbe75bdd719255c1' => __DIR__ . '/..' . '/firephp/firephp-core/lib/FirePHPCore/fb.php',
+    );
+
+    public static $prefixesPsr0 = array (
+        'P' => 
+        array (
+            'PHPThumb\\Tests' => 
+            array (
+                0 => __DIR__ . '/..' . '/masterexploder/phpthumb/tests',
+            ),
+            'PHPThumb' => 
+            array (
+                0 => __DIR__ . '/..' . '/masterexploder/phpthumb/src',
+            ),
+        ),
+    );
+
     public static $classMap = array (
         'Composer\\InstalledVersions' => __DIR__ . '/..' . '/composer/InstalledVersions.php',
+        'FB' => __DIR__ . '/..' . '/firephp/firephp-core/lib/FirePHPCore/fb.php',
+        'FirePHP' => __DIR__ . '/..' . '/firephp/firephp-core/lib/FirePHPCore/FirePHP.class.php',
+        'FirePHP_TestWrapper' => __DIR__ . '/..' . '/firephp/firephp-core/lib/FirePHPCore/FirePHP_TestWrapper.class.php',
         'Zebra_Pagination' => __DIR__ . '/..' . '/stefangabos/zebra_pagination/Zebra_Pagination.php',
     );
 
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
+            $loader->prefixesPsr0 = ComposerStaticInit0b0f17c0e3fc386c879c1e670df35671::$prefixesPsr0;
             $loader->classMap = ComposerStaticInit0b0f17c0e3fc386c879c1e670df35671::$classMap;
 
         }, null, ClassLoader::class);

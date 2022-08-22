@@ -26,9 +26,13 @@
     $sql = "SELECT * FROM notas LIMIT $empieza_aqui, $numero_elementos_pagina";
     $notas = $conexion->query($sql);
 
+    echo '<link rel="stylesheet" href="../vendor/stefangabos/zebra_pagination/public/css/zebra_pagination.css" type="text/css">';
+
     while ($nota = $notas->fetch_object()) {
         echo "<h1>{$nota->titulo}</h1>";
         echo "<h3>{$nota->descripcion}</h3> <hr>";
     }
+
+    $pagination->render();
 
     
