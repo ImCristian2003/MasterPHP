@@ -1,5 +1,6 @@
 <?php
 
+session_start();
 //Inclusión del autoload (Archivo que cargará automaticamente los controladores)
 require_once 'autoload.php';
 require_once 'config/db.php';

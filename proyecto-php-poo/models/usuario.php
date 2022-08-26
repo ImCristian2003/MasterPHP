@@ -12,6 +12,12 @@
         private $password;
         private $rol;
         private $imagen;
+        private $db;
+
+        public function __construct()
+        {
+            $this->db = Database::connect();
+        }
 
         //GET Y SET PARA EL ID
         public function getId(){
@@ -28,7 +34,7 @@
         }
 
         public function setNombre($nombre){
-            $this->nombre = $nombre;
+            $this->nombre = $this->db->real_escape_string($nombre);
         }
 
         //GET Y SET PARA EL APELLIDOS
@@ -37,7 +43,7 @@
         }
 
         public function setapellidos($apellidos){
-            $this->apellidos = $apellidos;
+            $this->apellidos = $this->db->real_escape_string($apellidos);
         }
 
         //GET Y SET PARA EL EMAIL
@@ -46,7 +52,7 @@
         }
 
         public function setEmail($email){
-            $this->email = $email;
+            $this->email = $this->db->real_escape_string($email);
         }
 
         //GET Y SET PARA EL PASSWORD
@@ -55,7 +61,7 @@
         }
 
         public function setPassword($password){
-            $this->password = $password;
+            $this->password = password_hash($this->db->real_escape_string($password), PASSWORD_BCRYPT, ['cost'=>4]);
         }
 
         //GET Y SET PARA EL ROL
@@ -76,9 +82,18 @@
             $this->image = $image;
         }
         
+        //METODOS PARA CONSULTAR A LA BD
         public function save(){
 
-            // $register = $db->
+            $sql = "INSERT INTO usuarios VALUES(null,'{$this->getNombre()}','{$this->getApellidos()}','{$this->getEmail()}','{$this->getPassword()}','user',null)";
+            $save = $this->db->query($sql);
+
+            $result = false;
+            if($save){
+                $result = true;
+            }
+            
+            return $result;
 
         }
 
