@@ -1,6 +1,3 @@
-CREATE DATABASE tienda_master;
-USE tienda_master;
-
 CREATE TABLE usuarios(
 id              int(255) auto_increment not null,
 nombre          varchar(100) not null,

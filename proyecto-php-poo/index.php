@@ -4,6 +4,8 @@ session_start();
 //Inclusión del autoload (Archivo que cargará automaticamente los controladores)
 require_once 'autoload.php';
 require_once 'config/db.php';
+//Libreria de funciones
+require_once 'helpers/utils.php';
 //Inclusion de la url base del proyecto
 require_once 'config/parameters.php';
 //Inclusión de las vistas
