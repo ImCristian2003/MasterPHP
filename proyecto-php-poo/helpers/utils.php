@@ -10,4 +10,18 @@
 
         }
 
+        public static function printErrors($sesion,$campo){
+
+            $alerta = "";
+
+            if(isset($sesion[$campo]) && !empty($campo)){
+
+                $alerta = "<div class='alert alert-danger'>$sesion[$campo]</div>";
+
+            }
+
+            return $alerta;
+
+        }
+
     }
