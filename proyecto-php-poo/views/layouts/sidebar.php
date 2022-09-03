@@ -14,6 +14,7 @@
                 <input type="submit" value="Enviar">
 
             </form>
+            <a href="<?=base_url?>usuario/registro">Registrate aquí</a>
         <?php else: ?>
 
             <h3><?=$_SESSION['identity']->nombre?></h3>
@@ -22,8 +23,8 @@
         
         <ul>
             <?php if(isset($_SESSION['admin'])): ?>
-                <li><a href="#">Getionar categorias</a></li>
-                <li><a href="#">Getionar productos</a></li>
+                <li><a href="<?=base_url;?>categoria/index">Gestionar categorias</a></li>
+                <li><a href="<?=base_url;?>producto/gestion">Gestionar productos</a></li>
                 <li><a href="#">Gestionar pedidos</a></li>
             <?php endif; ?>
 
