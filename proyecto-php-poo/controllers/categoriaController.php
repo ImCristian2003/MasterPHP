@@ -1,6 +1,7 @@
 <?php
 
     require_once 'models/categoria.php';
+    require_once 'models/producto.php';
 
     class CategoriaController{
 
@@ -20,6 +21,29 @@
             Utils::isAdmin();
 
             require_once "views/categoria/crear.php";
+
+        }
+
+        public function ver(){
+
+            if(isset($_GET['id'])){
+                
+                $id = $_GET['id'];
+
+                //Conseguir categoria
+                $categoria = new Categoria();   
+                $categoria->setId($id);
+
+                $categorias = $categoria->getOne();
+
+                //Conseguir producto
+                $producto = new Producto();
+                $producto->setCategoriaId($id);
+                $productos = $producto->getAllCategory();
+
+            }
+
+            require_once "views/categoria/ver.php";
 
         }
 

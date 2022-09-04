@@ -1,9 +1,14 @@
-        <!------------------------------------------CONTENIDO CENTRAL------------------------------------------->
-    
-    <div id="central">
-
-        <h1>Algunos de nuestros productos</h1>
-
+<div id="central">
+    <?php if(isset($categoria->id)): ?>
+        <h1><?=$categorias->nombre?></h1>
+    <?php else: ?>
+        <h1>La categoria no existe</h1>
+    <?php endif; ?>
+    <!----PRODUCTOS------->
+    <?php if($productos->num_rows == 0): ?>
+        <p>No hay productos para mostrar</p>
+    <?php else: ?>
+        
         <?php while($product = $productos->fetch_object()): ?>
         <div class="product">
             <?php if($product->imagen != null): ?>
@@ -16,5 +21,6 @@
                 <a href="">Comprar</a>
         </div>
         <?php endwhile; ?>
-
-    </div>
+        
+    <?php endif; ?>
+</div>

@@ -6,6 +6,9 @@
 
         public function index(){
 
+            $producto = new Producto();
+            $productos = $producto->getRandom(6);   
+
             //Renderizar vista
             require_once 'views/productos/destacados.php';
 
@@ -50,34 +53,43 @@
 
                     //Guardar la imagen
                     //Variable que almacena todo lo que trae la imagen(nombre, tipo,etc)
-                    $file = $_FILES['imagen'];
-                    //Guardar en una variable el nombre de la imagen
-                    $filename = $file['name'];
-                    //Guardar en una variable el tipo de la imagen (png, jpg, etc)
-                    $mimetype = $file['type'];
+                    if(isset($_FILES['imagen'])){
+                        $file = $_FILES['imagen'];
+                        //Guardar en una variable el nombre de la imagen
+                        $filename = $file['name'];
+                        //Guardar en una variable el tipo de la imagen (png, jpg, etc)
+                        $mimetype = $file['type'];
 
-                    //Validar que lo que llegue si sea una imagen
-                    if($mimetype == "image/jpg" || $mimetype == "image/jpeg" ||
-                    $mimetype == "image/png" || $mimetype == "image/gif"){
+                        //Validar que lo que llegue si sea una imagen
+                        if($mimetype == "image/jpg" || $mimetype == "image/jpeg" ||
+                        $mimetype == "image/png" || $mimetype == "image/gif"){
 
-                        //Si no existe un directorio donde guardar
-                        //Las imagenes, con esta validacion el
-                        //directorio se creará por si solo
-                        if(!is_dir('uploads/images')){
-                            //Permisos que se concederán
-                            //El true sirve para hacerle saber que es
-                            //un directorio recursivo
-                            mkdir('uploads/images',0777,true);
+                            //Si no existe un directorio donde guardar
+                            //Las imagenes, con esta validacion el
+                            //directorio se creará por si solo
+                            if(!is_dir('uploads/images')){
+                                //Permisos que se concederán
+                                //El true sirve para hacerle saber que es
+                                //un directorio recursivo
+                                mkdir('uploads/images',0777,true);
+                            }
+
+                            //Funcion para poner el archivo en la carpeta con su respectivo nombre
+                            move_uploaded_file($file['tmp_name'], 'uploads/images/'.$filename);
+                            //Cargar el nombre de la imagen
+                            $producto->setImagen($filename);
+
                         }
-
-                        //Funcion para poner el archivo en la carpeta con su respectivonombre
-                        move_uploaded_file($file['tmp_name'], 'uploads/images/'.$filename);
-                        //Cargar el nombre de la imagen
-                        $producto->setImagen($filename);
-
                     }
 
-                    $save = $producto->save();
+                    //Validacion para saber si se edita o se crea
+                    if(isset($_GET['id'])){
+                        $id = $_GET['id'];
+                        $producto->setId($id);
+                        $save = $producto->update();
+                    }else{
+                        $save = $producto->save();
+                    }
 
                     if($save){
                         $_SESSION['producto'] = "Complete";
@@ -101,9 +113,24 @@
 
         public function editar(){
 
-            $edit = true;
-            require_once 'views/productos/crear.php';
+            Utils::isAdmin();
 
+            if(isset($_GET['id'])){
+
+                $edit = true;
+
+                $id = $_GET['id'];
+
+                $producto = new Producto();
+                $producto->setId($id);
+
+                $prod = $producto->getOne();
+
+                require_once 'views/productos/crear.php';
+
+            }else{
+                header("Location:".base_url."producto/gestion");
+            }
         }
 
         public function eliminar(){
