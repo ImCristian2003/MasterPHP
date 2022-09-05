@@ -14,6 +14,22 @@
 
         }
 
+        public function ver(){
+
+            if(isset($_GET['id'])){
+
+                $id = $_GET['id'];
+
+                $producto = new Producto();
+                $producto->setId($id);
+
+                $prod = $producto->getOne();
+
+            }
+            require_once 'views/productos/ver.php';
+
+        }
+
         public function gestion(){
             Utils::isAdmin();
 

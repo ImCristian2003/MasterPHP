@@ -1,5 +1,5 @@
 <div id="central">
-    <?php if(isset($categoria->id)): ?>
+    <?php if(isset($categorias->id)): ?>
         <h1><?=$categorias->nombre?></h1>
     <?php else: ?>
         <h1>La categoria no existe</h1>
@@ -11,14 +11,16 @@
         
         <?php while($product = $productos->fetch_object()): ?>
         <div class="product">
-            <?php if($product->imagen != null): ?>
-                <img src="<?=base_url;?>uploads/images/<?=$product->imagen?>" alt="">
-            <?php else: ?>
-                <img src="<?=base_url;?>assets/img/camiseta.png<?=$product->imagen?>" alt="">
-            <?php endif; ?>
-                <h2><?=$product->nombre?></h2>
+            <a href="<?=base_url?>producto/ver&id=<?=$product->id?>">
+                <?php if($product->imagen != null): ?>
+                    <img src="<?=base_url;?>uploads/images/<?=$product->imagen?>" alt="">
+                <?php else: ?>
+                    <img src="<?=base_url;?>assets/img/camiseta.png<?=$product->imagen?>" alt="">
+                <?php endif; ?>
+                    <h2><?=$product->nombre?></h2>
+            </a>
                 <p><?=$product->precio?></p>
-                <a href="">Comprar</a>
+                <a href="" class="button">Comprar</a>
         </div>
         <?php endwhile; ?>
         
