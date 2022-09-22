@@ -5,7 +5,7 @@
 
         //Funcion estatica para conectar
         public static function connect(){
-
+            
             //Mysqli para generar la conexion
             $db = new mysqli("localhost","root","","tienda_master");
             //Consulta para que los campos lleguen con tildes y ñ
