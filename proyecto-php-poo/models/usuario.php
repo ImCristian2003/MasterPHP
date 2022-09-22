@@ -113,7 +113,10 @@
 
                 //Verificacion de la contraseña
                 $verify = password_verify($password, $usuario->password);
-
+                var_dump($verify);
+                var_dump($password);
+                var_dump($usuario->password);
+                die();
                 if($verify){
                     $result = $usuario;
                 }
